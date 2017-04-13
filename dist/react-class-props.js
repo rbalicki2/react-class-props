@@ -99,6 +99,8 @@ var _classWithName2 = _interopRequireDefault(_classWithName);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var mapObjectValuesToValue = function mapObjectValuesToValue(obj, value) {
@@ -107,23 +109,39 @@ var mapObjectValuesToValue = function mapObjectValuesToValue(obj, value) {
   }, {});
 };
 
+var getClassNamesFromProps = function getClassNamesFromProps(props, propsToClassMap, className) {
+  return [className].concat(_toConsumableArray(Object.keys(propsToClassMap).filter(function (key) {
+    return props[key];
+  }).map(function (key) {
+    return propsToClassMap[key];
+  }))).join(' ');
+};
+
+var getRemainingProps = function getRemainingProps(props, disallowedProps) {
+  return Object.keys(props).reduce(function (accum, key) {
+    return !disallowedProps.includes(key) ? _extends({}, accum, _defineProperty({}, key, props[key])) : {};
+  }, {});
+};
+
 exports.default = function (propsToClassMap) {
   return function (Component) {
     var parentClass = Object.getPrototypeOf(Component);
     var WrappedComponent = (0, _classWithName2.default)(Component.name, parentClass);
 
-    var additionalPropTypes = mapObjectValuesToValue(propsToClassMap, _react.PropTypes.string);
+    var additionalPropTypes = mapObjectValuesToValue(propsToClassMap, _react.PropTypes.bool);
 
     WrappedComponent.propTypes = _extends({}, Component.propTypes, {
       className: _react.PropTypes.string
     }, additionalPropTypes);
 
-    WrappedComponent.prototype.render = function () {
-      return _react2.default.createElement(
-        'div',
-        null,
-        'asdf'
-      );
+    WrappedComponent.prototype.render = function render() {
+      var className = this.props.className;
+
+      var rest = getRemainingProps(this.props, Object.keys(propsToClassMap));
+
+      return _react2.default.createElement(Component, _extends({
+        className: getClassNamesFromProps(this.props, propsToClassMap, className)
+      }, rest));
     };
 
     return WrappedComponent;
