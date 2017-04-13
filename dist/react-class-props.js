@@ -157,8 +157,8 @@ var getRemainingProps = function getRemainingProps(props, disallowedProps) {
 
 exports.default = function (propsToClassMap) {
   return function (Component) {
-    var parentClass = Object.getPrototypeOf(Component);
-    var WrappedComponent = (0, _componentWithName2.default)(Component.name, parentClass);
+    var ParentClass = Object.getPrototypeOf(Component);
+    var WrappedComponent = (0, _componentWithName2.default)(Component.name, ParentClass);
 
     var additionalPropTypes = mapObjectValuesToValue(propsToClassMap, _react.PropTypes.bool);
 

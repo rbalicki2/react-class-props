@@ -29,8 +29,8 @@ const getRemainingProps = (props, disallowedProps) => Object.keys(props)
   );
 
 export default propsToClassMap => (Component) => {
-  const parentClass = Object.getPrototypeOf(Component);
-  const WrappedComponent = componentWithName(Component.name, parentClass);
+  const ParentClass = Object.getPrototypeOf(Component);
+  const WrappedComponent = componentWithName(Component.name, ParentClass);
 
   const additionalPropTypes = mapObjectValuesToValue(
     propsToClassMap,
