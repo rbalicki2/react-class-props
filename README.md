@@ -16,7 +16,7 @@ And while the `propTypes` interface is elegant, the use of `className`s is not. 
 
 This library exposes a method that wraps existing Components and adds props which have the effect of creating more `className`s.
 
-(This library does not concern itself with `style`, although see [this section](#style).)
+(This library does not concern itself with `style`, although see [the inline-style section](#style).)
 
 ## Example
 
@@ -48,4 +48,18 @@ const TitleComponentWrapped = ({ className, title, pullRight, pullLeft }) => ({
 
 You can also use `reactClassProps` as a class decorator.
 
-## <a name="style"></a>Style
+## Api
+
+TBD
+
+## Principals
+
+* As few dependencies as possible.
+
+## <a name="style"></a>Inline style
+
+Inline styles can also be difficult to manage and as a project gets larger, and can grow out of hand. I would recommend encapsulating various commonly used style changes, e.g. `{ display: 'inline-block' }` as classes, and running those classes through this library.
+
+## Contributing
+
+Please, feel free to reach out :) robert.balicki@gmail.com
