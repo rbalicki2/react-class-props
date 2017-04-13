@@ -10,6 +10,8 @@ module.exports = {
   output: {
     filename: 'react-class-props.js',
     path: path.resolve(__dirname, 'dist'),
+    library: 'react-class-props',
+    libraryTarget: 'umd',
   },
   module: {
     rules: [
@@ -23,7 +25,12 @@ module.exports = {
       },
     ],
   },
-  externals : {
-    react: 'react'
+  externals: {
+    react: {
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'react',
+      root: 'React',
+    },
   },
 };
