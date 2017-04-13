@@ -35,10 +35,14 @@ const TitleComponentWrapped = reactClassProps({
 })(TitleComponent);
 ```
 
+and
+
 ```
 const TitleComponentWrapped = ({ className, title, pullRight, pullLeft }) => ({
   const className = `${pullRight ? 'pull-right' : ''} ${pullLeft ? 'pull-left' : ''} className`;
-  return <h1 className={className}>{ title }</h1>; 
+  return (<h1 className={className}>
+    { title }
+  </h1>);
 });
 ```
 
