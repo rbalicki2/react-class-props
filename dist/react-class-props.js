@@ -87,13 +87,45 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+// Adapted from:
+// http://stackoverflow.com/questions/35774928/how-does-babel-js-compile-a-class-declaration-into-es2015
+// http://stackoverflow.com/questions/5905492/dynamic-function-name-in-javascript
+exports.default = function (name, ParentClass) {
+  var classCallCheck = function classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a fuction.');
+    }
+  };
+
+  var applyString = ParentClass ? 'ParentClass.apply(this, arguments);' : '';
+
+  // eslint-disable-next-line no-new-func
+  var Component = new Function('ParentClass', '_classCallCheck', 'return function ' + name + '() { ' + applyString + '  _classCallCheck(this, ParentClass);' + '}')(ParentClass, classCallCheck);
+
+  Component.prototype = Object.create(ParentClass.prototype);
+  Component.prototype.constructor = Component;
+
+  return Component;
+};
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _componentWithName = __webpack_require__(4);
+var _componentWithName = __webpack_require__(0);
 
 var _componentWithName2 = _interopRequireDefault(_componentWithName);
 
@@ -149,7 +181,6 @@ exports.default = function (propsToClassMap) {
 };
 
 /***/ }),
-/* 1 */,
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -161,11 +192,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.componentWithName = undefined;
 
-var _wrapComponent = __webpack_require__(0);
+var _wrapComponent = __webpack_require__(1);
 
 var _wrapComponent2 = _interopRequireDefault(_wrapComponent);
 
-var _componentWithName = __webpack_require__(4);
+var _componentWithName = __webpack_require__(0);
 
 var _componentWithName2 = _interopRequireDefault(_componentWithName);
 
@@ -179,38 +210,6 @@ exports.componentWithName = _componentWithName2.default;
 /***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-// Adapted from:
-// http://stackoverflow.com/questions/35774928/how-does-babel-js-compile-a-class-declaration-into-es2015
-// http://stackoverflow.com/questions/5905492/dynamic-function-name-in-javascript
-exports.default = function (name, ParentClass) {
-  var classCallCheck = function classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a fuction.');
-    }
-  };
-
-  var applyString = ParentClass ? 'ParentClass.apply(this, arguments);' : '';
-
-  // eslint-disable-next-line no-new-func
-  var Component = new Function('ParentClass', '_classCallCheck', 'return function ' + name + '() { ' + applyString + '  _classCallCheck(this, ParentClass);' + '}')(ParentClass, classCallCheck);
-
-  Component.prototype = Object.create(ParentClass.prototype);
-  Component.prototype.constructor = Component;
-
-  return Component;
-};
 
 /***/ })
 /******/ ]);
