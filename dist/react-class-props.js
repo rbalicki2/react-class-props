@@ -93,9 +93,9 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classWithName = __webpack_require__(1);
+var _componentWithName = __webpack_require__(4);
 
-var _classWithName2 = _interopRequireDefault(_classWithName);
+var _componentWithName2 = _interopRequireDefault(_componentWithName);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -126,7 +126,7 @@ var getRemainingProps = function getRemainingProps(props, disallowedProps) {
 exports.default = function (propsToClassMap) {
   return function (Component) {
     var parentClass = Object.getPrototypeOf(Component);
-    var WrappedComponent = (0, _classWithName2.default)(Component.name, parentClass);
+    var WrappedComponent = (0, _componentWithName2.default)(Component.name, parentClass);
 
     var additionalPropTypes = mapObjectValuesToValue(propsToClassMap, _react.PropTypes.bool);
 
@@ -149,7 +149,39 @@ exports.default = function (propsToClassMap) {
 };
 
 /***/ }),
-/* 1 */
+/* 1 */,
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.componentWithName = undefined;
+
+var _wrapComponent = __webpack_require__(0);
+
+var _wrapComponent2 = _interopRequireDefault(_wrapComponent);
+
+var _componentWithName = __webpack_require__(4);
+
+var _componentWithName2 = _interopRequireDefault(_componentWithName);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _wrapComponent2.default;
+exports.componentWithName = _componentWithName2.default;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -179,31 +211,6 @@ exports.default = function (name, ParentClass) {
 
   return Component;
 };
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _wrapComponent = __webpack_require__(0);
-
-var _wrapComponent2 = _interopRequireDefault(_wrapComponent);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _wrapComponent2.default;
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
 
 /***/ })
 /******/ ]);

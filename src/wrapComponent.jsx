@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import classWithName from './classWithName';
+import componentWithName from './componentWithName';
 
 const mapObjectValuesToValue = (obj, value) => Object.keys(
   obj)
@@ -30,7 +30,7 @@ const getRemainingProps = (props, disallowedProps) => Object.keys(props)
 
 export default propsToClassMap => (Component) => {
   const parentClass = Object.getPrototypeOf(Component);
-  const WrappedComponent = classWithName(Component.name, parentClass);
+  const WrappedComponent = componentWithName(Component.name, parentClass);
 
   const additionalPropTypes = mapObjectValuesToValue(
     propsToClassMap,

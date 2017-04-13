@@ -20,9 +20,10 @@ This library exposes a method that wraps existing Components and adds props whic
 
 ## Example
 
-The following two are essentially equivalent:
+The following two examples are roughly equivalent:
 
 ```
+import React from 'react';
 import reactClassProps from 'react-class-props';
 
 const TitleComponent = ({ className, title }) => (<h1 className={className}>
@@ -38,6 +39,8 @@ const TitleComponentWrapped = reactClassProps({
 and
 
 ```
+import React from 'react';
+
 const TitleComponentWrapped = ({ className, title, pullRight, pullLeft }) => ({
   const className = `${pullRight ? 'pull-right' : ''} ${pullLeft ? 'pull-left' : ''} className`;
   return (<h1 className={className}>
@@ -48,13 +51,61 @@ const TitleComponentWrapped = ({ className, title, pullRight, pullLeft }) => ({
 
 You can also use `reactClassProps` as a class decorator.
 
-## Api
+```
+import React, { Component } from 'react';
+import reactClassProps from 'react-class-props';
 
-TBD
+@reactClassProps({
+  pullLeft: 'pull-left',
+  pullRight: 'pull-right',
+})
+class TitleComponentWrapped extends Component {
+  render() {
+    return (<h1 className={this.props.className}>
+      { this.props.title }
+    </h1>);
+  }
+}
 
-## Principals
+```
 
-* As few dependencies as possible.
+## API
+
+### `reactClassProps`
+
+Access this via `import reactClassProps from 'react-class-props';`
+
+This is the default class exported. It has the following signature:
+
+`propsToClassNamesHash => (Component => WrappedComponent)`
+
+`propsToClassNamesHash` is an object whose keys are names of props and whose values are classes you want applied to the component, e.g.
+
+```
+{
+  pullRight: 'pull-right',
+}
+```
+
+I haven't tested whether non-standard characters in the keys or values (e.g. other unicode characters, whitespace, etc.) work, so caveat emptor.
+
+### `componentWithName`
+
+Access this via `import { componentWithName } from 'react-class-props';`
+
+This is an internal utility class that creates a component with a particular name, that optionally extends from a parent class.
+
+Javascript does not make it easy to have dynamically named classes or functions. In our case, we use it so that when the component is logged out to the console, it has the same name as the original component.
+
+It has the following signature:
+
+`(name, ParentClass) => Component`
+
+Both are optional parameters. If `name` is supplied, the Component has that name, and if `ParentClass` is supplied, `Component` extends from that class.
+
+It's internal use is as follows:
+
+`WrappedComponent = componentWithName(Component.name, Object.getPrototypeOf(ParentClass));`
 
 ## <a name="style"></a>Inline style
 
@@ -62,4 +113,4 @@ Inline styles can also be difficult to manage and as a project gets larger, and 
 
 ## Contributing
 
-Please, feel free to reach out :) robert.balicki@gmail.com
+Please, feel free to reach out and contribute! [robert.balicki@gmail.com](mailto:robert.balicki@gmail.com)
