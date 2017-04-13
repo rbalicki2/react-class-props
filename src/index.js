@@ -1,13 +1,3 @@
-import { PropTypes } from  'react';
+import wrapComponent from './wrapComponent';
 
-import classWithName from './classWithName';
-
-export default propsToClassMap => (Component) => {
-  const parentClass = Object.getPrototypeOf(Component);
-
-  const classToReturn = classWithName(Component.name, parentClass);
-
-  classToReturn.propTypes = {
-    
-  };
-};
+export default wrapComponent;

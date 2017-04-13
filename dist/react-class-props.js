@@ -1,0 +1,181 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classWithName = __webpack_require__(1);
+
+var _classWithName2 = _interopRequireDefault(_classWithName);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var mapObjectValuesToValue = function mapObjectValuesToValue(obj, value) {
+  return Object.keys(obj).reduce(function (accum, key) {
+    return _extends({}, accum, _defineProperty({}, key, value));
+  }, {});
+};
+
+exports.default = function (propsToClassMap) {
+  return function (Component) {
+    var parentClass = Object.getPrototypeOf(Component);
+    var WrappedComponent = (0, _classWithName2.default)(Component.name, parentClass);
+
+    var additionalPropTypes = mapObjectValuesToValue(propsToClassMap, _react.PropTypes.string);
+
+    WrappedComponent.propTypes = _extends({}, Component.propTypes, {
+      className: _react.PropTypes.string
+    }, additionalPropTypes);
+
+    WrappedComponent.prototype.render = function () {
+      return _react2.default.createElement(
+        'div',
+        null,
+        'asdf'
+      );
+    };
+
+    return WrappedComponent;
+  };
+};
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+// Adapted from:
+// http://stackoverflow.com/questions/35774928/how-does-babel-js-compile-a-class-declaration-into-es2015
+// http://stackoverflow.com/questions/5905492/dynamic-function-name-in-javascript
+exports.default = function (name, ParentClass) {
+  var classCallCheck = function classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a fuction.');
+    }
+  };
+
+  var applyString = ParentClass ? 'ParentClass.apply(this, arguments);' : '';
+
+  // eslint-disable-next-line no-new-func
+  var Component = new Function('ParentClass', '_classCallCheck', 'return function ' + name + '() { ' + applyString + '  _classCallCheck(this, ParentClass);' + '}')(ParentClass, classCallCheck);
+
+  Component.prototype = Object.create(ParentClass.prototype);
+  Component.prototype.constructor = Component;
+
+  return Component;
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _wrapComponent = __webpack_require__(0);
+
+var _wrapComponent2 = _interopRequireDefault(_wrapComponent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _wrapComponent2.default;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = react;
+
+/***/ })
+/******/ ]);
