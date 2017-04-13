@@ -2,6 +2,23 @@
 
 > A utility class for decorating React components to turn props into classNames.
 
+## Quick reference
+
+```
+import reactClassProps from 'react-class-props';
+
+@reactClassProps({
+  propName: 'class-name',
+  // e.g.
+  pullRight: 'pull-right'
+})
+class MyComponent extends Component {
+  // ...
+}
+```
+
+Now, `MyComponent` accepts a `pullRight` prop that applies a `pull-right` class to the component!
+
 ## Motivation
 
 At its best, React components expose simple, clean and statically-typed interfaces (via `propTypes`) that effectively hide their internal complexity. However, these components often are not sufficient for our needs, and we need to resort to the use of `className`s (and `style`) to augment their capabilities.
