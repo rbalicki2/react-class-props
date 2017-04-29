@@ -21,7 +21,7 @@ Now, `MyComponent` accepts a `pullRight` prop that applies a `pull-right` class 
 
 ## Motivation
 
-At its best, React components expose simple, clean and statically-typed interfaces (via `propTypes`) that effectively hide their internal complexity. However, these components often are not sufficient for our needs, and we need to resort to the use of `className`s (and `style`) to augment their capabilities.
+At their best, React components expose simple, clean and statically-typed interfaces (via `propTypes`) that effectively hide their internal complexity. However, these components often are not sufficient for our needs, and we need to resort to the use of `className`s (and `style`) to augment their capabilities.
 
 And while the `propTypes` interface is elegant, the use of `className`s is not. Some of the downsides of using the `className`s interface include:
 
