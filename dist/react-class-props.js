@@ -160,6 +160,9 @@ exports.default = function (propsToClassMap) {
     var ParentClass = Object.getPrototypeOf(Component);
     var WrappedComponent = (0, _componentWithName2.default)(Component.name, ParentClass);
 
+    // Transfer static properties
+    Object.assign(WrappedComponent, Component);
+
     var additionalPropTypes = mapObjectValuesToValue(propsToClassMap, _react.PropTypes.bool);
 
     WrappedComponent.propTypes = _extends({}, Component.propTypes, {
