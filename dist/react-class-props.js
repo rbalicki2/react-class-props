@@ -539,9 +539,11 @@ var getClassNamesFromProps = function getClassNamesFromProps(props, propsToClass
   }))).join(' ');
 };
 
+// NB: this excludes className whether or not it is included as a prop.
+// I'm not convinced this is the most elegant solution.
 var getRemainingProps = function getRemainingProps(props, disallowedProps) {
   return Object.keys(props).reduce(function (accum, key) {
-    return !disallowedProps.includes(key) ? _extends({}, accum, _defineProperty({}, key, props[key])) : {};
+    return !disallowedProps.includes(key) && key !== 'className' ? _extends({}, accum, _defineProperty({}, key, props[key])) : accum;
   }, {});
 };
 

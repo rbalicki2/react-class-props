@@ -21,11 +21,13 @@ const getClassNamesFromProps = (props, propsToClassMap, className) => ([
   ),
 ].join(' '));
 
+// NB: this excludes className whether or not it is included as a prop.
+// I'm not convinced this is the most elegant solution.
 const getRemainingProps = (props, disallowedProps) => Object.keys(props)
   .reduce(
-    (accum, key) => (!disallowedProps.includes(key)
+    (accum, key) => (!disallowedProps.includes(key) && (key !== 'className')
       ? { ...accum, [key]: props[key] }
-      : {}),
+      : accum),
     {}
   );
 
