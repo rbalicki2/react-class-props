@@ -59,8 +59,8 @@ and
 import React from 'react';
 
 const TitleComponentWrapped = ({ className, title, pullRight, pullLeft }) => ({
-  const className = `${pullRight ? 'pull-right' : ''} ${pullLeft ? 'pull-left' : ''} className`;
-  return (<h1 className={className}>
+  const newClassName = `${pullRight ? 'pull-right' : ''} ${pullLeft ? 'pull-left' : ''} ${className}`;
+  return (<h1 className={newClassName}>
     { title }
   </h1>);
 });
